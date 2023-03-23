@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import ProductCard from './components/ProductCard';
 import './App.css';
 
 function App() {
@@ -21,9 +22,7 @@ function App() {
       <ul className="product-list">
         {products.length > 0 ? (
           products.map((product) => (
-            <li key={product.id}>
-              {product.brand} - {product.title}
-            </li>
+            <ProductCard key={product.id} product={product} />
           ))
         ) : (
           <li>No products found.</li>
