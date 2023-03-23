@@ -4,6 +4,8 @@ import './App.css';
 
 function App() {
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   useEffect(() => {
     // Fetch the initial list of products
@@ -14,11 +16,48 @@ function App() {
         setProducts(data.products);
       })
       .catch(console.error);
+
+    // Fetch the list of categories
+    fetch('https://dummyjson.com/products/categories')
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setCategories(data);
+      })
+      .catch(console.error);
   }, []);
+
+  useEffect(() => {
+    // Fetch the current category
+    if (!selectedCategory) {
+      return;
+    }
+
+    fetch(`https://dummyjson.com/products/category/${selectedCategory}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setProducts(data.products);
+      })
+      .catch(console.error);
+  }, [selectedCategory]);
 
   return (
     <div className="App">
       <h1>Product Viewer</h1>
+
+      <label htmlFor="category-select">Choose a category:</label>
+      <select
+        name="categories"
+        id="category-select"
+        value={selectedCategory}
+        onChange={(ev) => setSelectedCategory(ev.target.value)}
+      >
+        {categories.map((category) => (
+          <option key={category}>{category}</option>
+        ))}
+      </select>
+
       <ul className="product-list">
         {products.length > 0 ? (
           products.map((product) => (
