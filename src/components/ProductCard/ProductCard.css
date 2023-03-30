@@ -1,0 +1,6 @@
+.product-card {
+  min-width: 30rem;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.5rem;
+}
