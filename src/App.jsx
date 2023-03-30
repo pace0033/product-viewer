@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import ProductCard from './components/ProductCard';
+import ProductCard from './components/ProductCard/ProductCard';
 import './App.css';
 
 function App() {
@@ -42,6 +42,10 @@ function App() {
       .catch(console.error);
   }, [selectedCategory]);
 
+  function categoryHandler(ev) {
+    setSelectedCategory(ev.target.value);
+  }
+
   return (
     <div className="App">
       <h1>Product Viewer</h1>
@@ -51,7 +55,7 @@ function App() {
         name="categories"
         id="category-select"
         value={selectedCategory}
-        onChange={(ev) => setSelectedCategory(ev.target.value)}
+        onChange={categoryHandler}
       >
         {categories.map((category) => (
           <option key={category}>{category}</option>
