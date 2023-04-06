@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
+import { useProducts } from './hooks/ProductsContext';
 import ProductCard from './components/ProductCard/ProductCard';
 import './App.css';
 
 function App() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useProducts();
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
 
