@@ -1,10 +1,13 @@
 //ProductsContext.jsx
 import { createContext, useState, useContext } from 'react';
+import { useLocalStorage } from './UseLocalStorage';
 
 const ProductsContext = createContext(); //create the context object
 
 function ProductsProvider(props) {
-  const [products, setProducts] = useState([]);
+  // when products get set, save in localstorage
+  // const [products, setProducts] = useState([]);
+  const [products, setProducts] = useLocalStorage('product-viewer-list', []);
 
   return (
     <ProductsContext.Provider value={[products, setProducts]} {...props} />
